@@ -1,0 +1,62 @@
+# Python Code to create a file monitoring System by Umakant Tripathi
+# File check with last updated file and compare , send an email with the last file timestamp
+python
+Copy code
+import os
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from datetime import datetime, timedelta
+
+# Function to get the last modified time of a file
+file_path=C:\temp
+def get_file_timestamp(file_path):
+    return datetime.fromtimestamp(os.path.getmtime(file_path))
+
+# Function to check if the file is older than the specified duration
+def is_file_recent(file_path, max_age_minutes=60):
+    file_timestamp = get_file_timestamp(file_path)
+    current_time = datetime.now()
+    age = current_time - file_timestamp
+    return age.total_seconds() / 60 <= max_age_minutes
+
+# Function to send an email with the file's last modified time
+def send_email(file_path, to_email, cc_email):
+    sender_email = "your_email@example.com"  # Replace with your email
+    smtp_server = "smtp.example.com"  # Replace with your SMTP server
+
+    # Create the message
+    message = MIMEMultipart()
+    message["From"] = ABC@gmail.com
+    message["To"] = XXX@gmail.com
+    message["Cc"] = YYY@gmail.com
+    message["Subject"] = "File Last Updated Time Notification"
+
+    # Body of the email
+    body = f"The last updated time of the file {file_path} is {get_file_timestamp(file_path)}."
+
+    # Attach the body to the email
+    message.attach(MIMEText(body, "plain"))
+
+    # Connect to the SMTP server and send the email
+    with smtplib.SMTP(smtp_server) as server:
+        server.sendmail(sender_email, [to_email, cc_email], message.as_string())
+
+# Shared directory path
+shared_directory = "/path/to/shared/directory"
+
+# Get a list of files in the shared directory
+files_in_directory = os.listdir(shared_directory)
+
+# Iterate through each file in the directory
+for file_name in files_in_directory:
+    file_path = os.path.join(shared_directory, file_name)
+
+    # Check if the file is recent
+    if is_file_recent(file_path):
+        # Replace these with the actual email addresses
+        to_email = "recipient@example.com"
+        cc_email = "cc@example.com"
+
+        # Send an email with the file's last updated time
+        send_email(file_path, to_email, cc_email)
