@@ -1,4 +1,4 @@
-# Supporttoolkit created by Umakant Tripathi
+# /*Copyright (C) 2019 by Umakant Tripathi
 # Python Support tool kit to create a dashboard in Tkinter with UI input
 
 # Press Shift+F10 to execute it or replace it with your code.
