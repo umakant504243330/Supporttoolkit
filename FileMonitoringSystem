@@ -1,4 +1,4 @@
-# Python Code to create a file monitoring System by Umakant Tripathi
+# /*Copyright (C) 2023 by Umakant Tripathi : Python Code to create a file monitoring System */
 # File check with last updated file and compare , send an email with the last file timestamp
 python
 Copy code
